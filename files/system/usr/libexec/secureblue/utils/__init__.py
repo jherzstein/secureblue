@@ -168,15 +168,19 @@ def is_rpm_package_installed(name: str) -> bool:
     return len(matches) > 0
 
 
-def logout():
+def logout(user: str):
     match Image.from_image_ref(booted_image_ref()):
         case Image.SERICEA:
             subprocess.run(
                 ["swaymsg", "exit"], check=True
             )
+        case Image.KINOITE:
+            subprocess.run(
+                ["qdbus-qt6", "org.kde.Shutdown", "/ShutDown", "logout"], check=True
+            )
         case _:
             subprocess.run(
-                ["loginctl", "terminate-user", os.environ["USER"]], check=True
+                ["loginctl", "terminate-user", user], check=True
             )
 
 
