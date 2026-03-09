@@ -88,11 +88,11 @@ jobs:
       actions: read # Needed to read actions and actions logs for provenance generation
       packages: write # Needed to publish images
       id-token: write # Needed for token generation for signing
-      clear-plan: ${{ inputs.clear-plan || false }}
     uses: ./.github/workflows/build-one-recipe.yml
     with:
       recipe: general/recipe-cosmic-main.yml
       rechunk: true
+      clear-plan: ${{ inputs.clear-plan || false }}
     secrets:
       SIGNING_SECRET: ${{ secrets.SIGNING_SECRET }}
       KERNEL_PRIVKEY: ${{ secrets.KERNEL_PRIVKEY }}
