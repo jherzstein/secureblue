@@ -98,9 +98,7 @@ def main() -> int:
         return 1
 
     disabled_by_file = Path(SND_MOD_FILE).exists()
-    uname = subprocess.run(["uname", "-r"], capture_output=True, check=True, text=True)
-    kernel = uname.stdout.strip()
-    sound_function = sandbox.SandboxedFunction("sound.py", read_write_paths=[SND_MOD_DIR, f"/lib/modules/{kernel}/kernel/sound"])
+    sound_function = sandbox.SandboxedFunction("sound.py", read_write_paths=[SND_MOD_DIR, "/proc"])
     match mode:
         case "on" | "off":
             target_state_enabled = mode == "on"
