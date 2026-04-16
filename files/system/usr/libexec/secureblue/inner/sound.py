@@ -31,7 +31,7 @@ def main() -> int:
             return 0
         case "off":
             kernel = os.uname().release
-            root_dir = f"/lib/modules{kernel}/kernel/sound"
+            root_dir = f"/lib/modules/{kernel}/kernel/sound"
             unwanted_modules = []
 
             for dirpath, dirnames, filenames in os.walk(root_dir):
